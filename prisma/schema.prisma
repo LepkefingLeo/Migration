@@ -5,12 +5,28 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider     = "prisma-client"
+  output       = "../generated/prisma"
   moduleFormat = "cjs"
+  previewFeatures = ["views"]
 }
 
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+model Bike {
+  id        Int     @id @default(autoincrement())
+  name      String
+  wheelSize Int
+  electric  Boolean @default(false)
+  gearCount Int @default(1)
+}
+
+view ElectricBikes {
+  id Int
+  name String
+  wheelSize Int
+  gearCount Int
 }
